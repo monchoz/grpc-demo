@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  client:
+    build: .
+    command: poetry run python3 /usr/app/client.py
+    volumes:
+      - ./grpc_demo/client/client.py:/usr/app/client.py:ro
+      - ./grpc_demo/services:/usr/app/services
+    depends_on:
+      - server
+
+  server:
+    build: .
+    command: poetry run python3 /usr/app/server.py
+    volumes:
+      - ./grpc_demo/server/server.py:/usr/app/server.py:ro
+      - ./grpc_demo/services:/usr/app/services
